@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,15 +21,25 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.ListView);
 
-        ArrayList<String> posts = new ArrayList<>();
+        ArrayList<String> colors = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
-            posts.add("Post " + i);
-            Log.i("posts: ", posts.get(i));
-        }
+        colors.add("Жёлтый");
+        colors.add("Синий");
+        colors.add("Красный");
+        colors.add("Зелёный");
+        colors.add("Розовый");
+        colors.add("Чёрный");
+        colors.add("Коричневый");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, posts);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, colors);
 
         listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, colors.get(position), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
